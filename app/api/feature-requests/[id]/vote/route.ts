@@ -28,18 +28,19 @@ export async function POST(request: NextRequest, { params }: Context) {
     return NextResponse.json({ error: 'Failed to record vote' }, { status: 500 })
   }
 
-  // Count total votes and sync the denormalized column atomically via RPC
-  const { data, error: rpcError } = await supabase.rpc('sync_vote_count', {
+  // Atomically increment the existing vote_count (preserves seeded counts)
+  const { data, error: rpcError } = await supabase.rpc('increment_vote_count', {
     p_request_id: id,
   })
 
   if (rpcError) {
-    // Fallback: count manually
-    const { count } = await supabase
-      .from('votes')
-      .select('*', { count: 'exact', head: true })
-      .eq('request_id', id)
-    return NextResponse.json({ vote_count: count ?? 0 })
+    // Fallback: fetch current count and return it
+    const { data: row } = await supabase
+      .from('feature_requests')
+      .select('vote_count')
+      .eq('id', id)
+      .single()
+    return NextResponse.json({ vote_count: (row?.vote_count ?? 0) + 1 })
   }
 
   return NextResponse.json({ vote_count: data })
