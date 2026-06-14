@@ -1,4 +1,4 @@
-export type FeatureStatus = 'pending' | 'building' | 'shipped' | 'rejected'
+export type FeatureStatus = 'pending' | 'candidate' | 'building' | 'shipped' | 'rejected'
 
 export interface FeatureRequest {
   id: string

@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
 
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
   let ideas = 0, nShipped = 0, nFixed = 0
 

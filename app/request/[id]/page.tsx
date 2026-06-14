@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import { StatusBadge } from '@/components/StatusBadge'
+import { ShareButton } from '@/components/ShareButton'
+import { CommentThread } from '@/components/CommentThread'
 import type { FeatureRequest } from '@/lib/types'
 
 interface Props {
@@ -82,7 +84,10 @@ export default async function RequestPage({ params }: Props) {
             View PR →
           </a>
         )}
+        <ShareButton title={request.title} />
       </div>
+
+      <CommentThread requestId={request.id} />
     </div>
   )
 }

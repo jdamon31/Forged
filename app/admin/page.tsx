@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import type { FeatureRequest, FeatureStatus } from '@/lib/types'
 
-const STATUSES: FeatureStatus[] = ['pending', 'building', 'shipped', 'rejected']
+const STATUSES: FeatureStatus[] = ['pending', 'candidate', 'building', 'shipped', 'rejected']
 
 export default function AdminPage() {
   const [secret, setSecret]         = useState('')
