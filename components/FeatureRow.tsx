@@ -8,9 +8,10 @@ import { StatusBadge } from './StatusBadge'
 interface Props {
   request: FeatureRequest
   onVote: (id: string, newCount: number) => void
+  hideStatus?: boolean
 }
 
-export function FeatureRow({ request, onVote }: Props) {
+export function FeatureRow({ request, onVote, hideStatus = false }: Props) {
   return (
     <div className="flex items-center gap-4 py-4 border-b border-border hover:border-border-hover transition-colors group">
       <VoteButton
@@ -25,7 +26,7 @@ export function FeatureRow({ request, onVote }: Props) {
         </span>
       </Link>
 
-      <StatusBadge status={request.status} />
+      {!hideStatus && <StatusBadge status={request.status} />}
 
       <Link
         href={`/request/${request.id}`}

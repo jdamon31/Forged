@@ -32,7 +32,7 @@ function WeeklyBanner({ candidates, onVote }: { candidates: FeatureRequest[]; on
         {candidates.map((req, i) => (
           <div key={req.id} className="flex items-center gap-4 py-3 border-b border-accent/10 last:border-0">
             <span className="font-mono text-xs text-accent/50 w-4 shrink-0">#{i + 1}</span>
-            <FeatureRow request={req} onVote={onVote} />
+            <FeatureRow request={req} onVote={onVote} hideStatus />
           </div>
         ))}
       </div>

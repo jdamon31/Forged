@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const links = [
-  { href: '/board',     label: 'Board' },
-  { href: '/changelog', label: 'Changelog' },
-  { href: '/report',    label: 'Report bug' },
+  { href: '/board',     label: 'Board',     short: 'Board' },
+  { href: '/changelog', label: 'Changelog', short: 'Log' },
+  { href: '/report',    label: 'Report bug', short: 'Report' },
 ]
 
 export function Nav() {
@@ -32,7 +32,8 @@ export function Nav() {
                   : 'text-muted hover:text-foreground'
               }`}
             >
-              {link.label}
+              <span className="hidden sm:inline">{link.label}</span>
+            <span className="sm:hidden">{link.short}</span>
             </Link>
           ))}
         </div>

@@ -62,28 +62,32 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Stats — only show once data exists */}
-      {(ideas + nShipped + nFixed) > 0 && (
-        <>
-          <div className="border-t border-border" />
-          <section className="py-16">
-            <div className="grid grid-cols-3 gap-8 animate-fade-in">
-              {[
-                { value: ideas,    label: 'ideas submitted' },
-                { value: nShipped, label: 'features shipped' },
-                { value: nFixed,   label: 'bugs fixed' },
-              ].map(({ value, label }) => (
-                <div key={label}>
-                  <div className="font-display text-[clamp(36px,6vw,72px)] leading-none text-accent">
-                    {value}
+      {/* Stats — only show non-zero values */}
+      {(() => {
+        const stats = [
+          { value: ideas,    label: 'ideas submitted' },
+          { value: nShipped, label: 'features shipped' },
+          { value: nFixed,   label: 'bugs fixed' },
+        ].filter((s) => s.value > 0)
+        if (!stats.length) return null
+        return (
+          <>
+            <div className="border-t border-border" />
+            <section className="py-16">
+              <div className="flex gap-12 flex-wrap animate-fade-in">
+                {stats.map(({ value, label }) => (
+                  <div key={label}>
+                    <div className="font-display text-[clamp(36px,6vw,72px)] leading-none text-accent">
+                      {value}
+                    </div>
+                    <div className="font-mono text-xs text-muted mt-2">{label}</div>
                   </div>
-                  <div className="font-mono text-xs text-muted mt-2">{label}</div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </>
-      )}
+                ))}
+              </div>
+            </section>
+          </>
+        )
+      })()}
     </div>
   )
 }
