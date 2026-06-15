@@ -2,7 +2,6 @@ import type { FeatureStatus } from '@/lib/types'
 
 const config: Record<FeatureStatus, { label: string; className: string }> = {
   pending:   { label: 'pending',      className: 'text-muted' },
-  candidate: { label: '⚡ candidate', className: 'text-accent' },
   building:  { label: '🔨 building',  className: 'text-accent animate-pulse-slow' },
   shipped:   { label: '✓ shipped',    className: 'text-green-500' },
   rejected:  { label: 'rejected',     className: 'text-red-500/40' },

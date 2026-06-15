@@ -46,8 +46,9 @@ export function FeatureBoard({ initialRequests }: { initialRequests: FeatureRequ
   const [showSubmit, setShowSubmit] = useState(false)
 
   const candidates = requests
-    .filter((r) => r.status === 'candidate')
+    .filter((r) => r.status === 'pending')
     .sort((a, b) => b.vote_count - a.vote_count)
+    .slice(0, 3)
 
   const filtered =
     filter === 'all'
